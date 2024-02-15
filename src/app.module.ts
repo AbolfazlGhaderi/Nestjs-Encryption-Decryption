@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { UsersModule } from './modules/users/users.module';
+import { loggerMiddleware } from './global/middlewares/logger.middleware';
 
 @Module({
   imports: [ConfigModule.forRoot(),TypeOrmModule.forRoot({
@@ -15,8 +15,12 @@ import { ConfigModule } from '@nestjs/config';
     entities: [__dirname + '/**/entities/*.entity{.ts,.js}'],
     synchronize:true
     
-  })],
-  controllers: [AppController],
-  providers: [AppService],
+  }), UsersModule],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(loggerMiddleware).forRoutes('*')
+  }
+}
