@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as crypto from 'crypto';
 
 
-class ghaderCryption {
+class asymmetricenCryption {
   private privateKey: string;
   private publicKey: string;
 
@@ -85,18 +85,18 @@ class ghaderCryption {
   }
   
 
-   encryption(plainData: userDto) {
+   encryption(plainEmail:string) {
+     
+     // const encrypted = crypto.publicEncrypt(
+     //   { key: keys.publicKey, padding: crypto.constants.RSA_PKCS1_PADDING },
+     //   Buffer.from(plaintext),
+     // );
+
     const keys = this.checkKey();
 
-    const plaintext = 'hello my friend !';
+    const encrypted = this.encryptDataWithPublicKey(Buffer.from(plainEmail),keys.publicKey)
 
-    // const encrypted = crypto.publicEncrypt(
-    //   { key: keys.publicKey, padding: crypto.constants.RSA_PKCS1_PADDING },
-    //   Buffer.from(plaintext),
-    // );
-
-    const encrypted = this.encryptDataWithPublicKey(Buffer.from(plaintext),keys.publicKey)
-
+    
     return encrypted.toString('base64')
     
   }
@@ -111,12 +111,12 @@ class ghaderCryption {
     //   { key: keys.privateKey, padding: crypto.constants.RSA_PKCS1_PADDING },
     //   Buffer.from(encrypted,'base64'),
     // );
-
-    const decrypted = this.decryptDataWithPrivateKey(Buffer.from(encrypted,'base64'),keys.privateKey)
+    const email = encrypted.split(':')
+    const decrypted = this.decryptDataWithPrivateKey(Buffer.from(email[1],'base64'),keys.privateKey)
     
     
-    console.log(decrypted.toString());
+    return decrypted.toString();
   }
 }
 
-export default ghaderCryption;
+export default asymmetricenCryption;

@@ -15,4 +15,9 @@ export class UsersController {
   create(@Body() userData:userDto){
     return this.usersService.createUser(userData)
   }
+
+  @Get('g')
+  getUser(){
+    return this.usersService.getUser()
+  }
 }

@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('users')
+
  class UserEntity {
 
   @PrimaryGeneratedColumn()
@@ -9,11 +10,11 @@ import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeor
   @Column({nullable:false})
   name:string
 
-  @Column({ unique: true, nullable: false })
+  @Column({ unique: true, nullable: false , length:400})
   email: string;
 
-  @Column({ unique: true, nullable: false })
-  phoneNumber:string
+  @CreateDateColumn()
+  create_at:Date
 
 }
 
