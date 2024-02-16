@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { userDto } from './dto/user.dto';
-import { encription } from 'src/global/helpers/encription.decription';
+import ghaderCryption from 'src/global/helpers/encryption.decryption';
+
 
 @Injectable()
 export class UsersService {
@@ -9,7 +10,18 @@ export class UsersService {
         return 'Get All'
     }
 
-    createUser(data:userDto){
-        return encription(data)
+    
+    async createUser(data:userDto){
+        console.log("1");
+        const cryption = new ghaderCryption();
+        console.log("2");
+        const encrypted =  cryption.encryption(data)
+        console.log(encrypted);
+
+        const decrypt = cryption.decryption(encrypted)
+
+        // console.log(decrypt);
+
+        
     }
 }
