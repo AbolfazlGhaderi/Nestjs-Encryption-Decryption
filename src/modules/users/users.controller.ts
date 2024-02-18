@@ -20,4 +20,13 @@ export class UsersController {
   getUser(){
     return this.usersService.getUser()
   }
+
+  //----------------------- symmetric ---------------------------------
+
+
+  @Post('symmetric')
+  createUserSymmetric(@Body() data: userDto) {
+
+    return this.usersService.createUserSymmetric(data)
+  }
 }

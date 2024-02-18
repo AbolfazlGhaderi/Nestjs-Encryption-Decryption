@@ -7,7 +7,7 @@ class asymmetricenCryption {
   private privateKey: string;
   private publicKey: string;
 
-  checkKey() {
+  #checkKey() {
     const publickeyPath = './publicKey.pem';
     const privatekeyPath = './privateKey.pem';
 
@@ -92,7 +92,7 @@ class asymmetricenCryption {
      //   Buffer.from(plaintext),
      // );
 
-    const keys = this.checkKey();
+    const keys = this.#checkKey();
 
     const encrypted = this.encryptDataWithPublicKey(Buffer.from(plainEmail),keys.publicKey)
 
@@ -105,7 +105,7 @@ class asymmetricenCryption {
 
    decryption(encrypted : string) {
 
-    const keys = this.checkKey();
+    const keys = this.#checkKey();
     
     // const decrypted = crypto.privateDecrypt(
     //   { key: keys.privateKey, padding: crypto.constants.RSA_PKCS1_PADDING },
